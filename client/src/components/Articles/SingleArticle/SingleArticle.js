@@ -6,7 +6,7 @@ import {
   editArticle,
   getAnArticle,
 } from "../../../actions/articlesAct";
-import { Card, Button } from "react-bootstrap";
+import { Container, Button, Card, Stack, Row, Col } from "react-bootstrap";
 
 const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
   const dispatch = useDispatch();
@@ -35,20 +35,93 @@ const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
   };
 
   return (
-    <Card className="single-article mb-3">
-      <Card.Header as="h5">Title: {article?.title}</Card.Header>
-      <Card.Body>
-        <Card.Text>Description: {article?.description}</Card.Text>
-        <Card.Text>Full Description: {article?.fullDescription}</Card.Text>
-        <Card.Text>Topic: {article?.topic}</Card.Text>
-        <Card.Text>Module: {article?.module}</Card.Text>
-        <Card.Text>Created At: {article?.createdAt}</Card.Text>
-        <Button onClick={handleEdit}>Edit</Button>
-        <Button onClick={() => dispatch(deleteArticle(articleId))}>
-          Delete
-        </Button>
-      </Card.Body>
-    </Card>
+    <Container>
+      <Row className="mb-3 pt-3">
+        <Col lg="10" className="text-white fs-2">
+          Articles Section
+        </Col>
+      </Row>
+      <Card>
+        <Card.Header className="fs-6">
+          {article?.module} - {article?.topic}
+        </Card.Header>
+        <Row>
+          <Stack direction="horizontal" gap={5}>
+            <Container>
+              <Col>
+                <Card.Text className="fs-5 fw-bolder text-decoration-underline">
+                  {article?.title}
+                </Card.Text>
+              </Col>
+            </Container>
+            <Container>
+              <Stack
+                direction="horizontal"
+                gap={2}
+                className="col-md-5 pt-3 mx-auto fs-6"
+              >
+                <Row>
+                  <Col>
+                    <Card.Text className="fw-bold">Topic:</Card.Text>
+                  </Col>
+                  <Col>
+                    <Card.Text>{article?.topic}</Card.Text>
+                  </Col>
+                </Row>
+              </Stack>
+              <Stack
+                direction="horizontal"
+                gap={2}
+                className="col-md-5 pt-3 mx-auto fs-6"
+              >
+                <Row>
+                  <Col>
+                    <Card.Text className="fw-bold">Module:</Card.Text>
+                  </Col>
+                  <Col>
+                    <Card.Text>{article?.module}</Card.Text>
+                  </Col>
+                </Row>
+              </Stack>
+            </Container>
+          </Stack>
+        </Row>
+        <Container className="pt-5 fs-5">
+          <Card.Body className="pb-5">
+            <Card.Text>{article?.fullDescription}</Card.Text>
+          </Card.Body>
+        </Container>
+
+        <Card.Footer>
+          <Button
+            active
+            variant="outline-secondary"
+            size="md"
+            className="ms-1"
+            onClick={handleEdit}
+          >
+            Edit
+          </Button>
+
+          <Button
+            variant="outline-secondary"
+            size="md"
+            className="ms-4"
+            onClick={() => dispatch(deleteArticle(articleId))}
+          >
+            Delete
+          </Button>
+          <Button
+            variant="outline-secondary"
+            size="md"
+            className="ms-4"
+            onClick={() => history.goBack()}
+          >
+            Cancel
+          </Button>
+        </Card.Footer>
+      </Card>
+    </Container>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteFaq, editFaq, getFaq } from "../../../actions/faqAct";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container, Row, Col } from "react-bootstrap";
 
 const SingleFaq = ({ post, setCurrentId, ...rest }) => {
   const dispatch = useDispatch();
@@ -27,16 +27,48 @@ const SingleFaq = ({ post, setCurrentId, ...rest }) => {
   };
 
   return (
-    <Card className="single-post mb-3">
-      <Card.Header>Subject: {post?.subject}</Card.Header>
-      <Card.Body>
-        <Card.Text>Description: {post?.description}</Card.Text>
-        <Button onClick={handleEdit}>Edit</Button>
-        <Button className="ms-4" onClick={() => dispatch(deleteFaq(postId))}>
-          Delete
-        </Button>
-      </Card.Body>
-    </Card>
+    <Container>
+      <Row className="mb-3 pt-3">
+        <Col lg="10" className="text-white fs-2">
+          FAQs
+        </Col>
+      </Row>
+      <Card>
+        <Card.Header className="fs-6">{post?.subject}</Card.Header>
+        <Container>
+          <Card.Body>
+            <Card.Text>{post?.description}</Card.Text>
+          </Card.Body>
+        </Container>
+        <Card.Footer>
+          <Button
+            active
+            variant="outline-secondary"
+            size="md"
+            className="ms-1"
+            onClick={handleEdit}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="outline-secondary"
+            size="md"
+            className="ms-4"
+            onClick={() => dispatch(deleteFaq(postId))}
+          >
+            Delete
+          </Button>
+          <Button
+            variant="outline-secondary"
+            size="md"
+            className="ms-4"
+            onClick={() => history.goBack()}
+          >
+            Cancel
+          </Button>
+        </Card.Footer>
+      </Card>
+    </Container>
   );
 };
 

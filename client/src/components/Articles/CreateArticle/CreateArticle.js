@@ -44,6 +44,7 @@ const CreateArticle = ({ currentId, setCurrentId, ...rest }) => {
     setArticleData({
       title: "",
       description: "",
+      fullDescription: "",
     });
   };
 
