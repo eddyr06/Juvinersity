@@ -34,6 +34,11 @@ const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
     }
   };
 
+  const handleDelete = (e) => {
+    dispatch(deleteArticle(articleId));
+    history.push("/Topics");
+  };
+
   return (
     <Container>
       <Row className="mb-3 pt-3">
@@ -107,7 +112,7 @@ const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
             variant="outline-secondary"
             size="md"
             className="ms-4"
-            onClick={() => dispatch(deleteArticle(articleId))}
+            onClick={handleDelete}
           >
             Delete
           </Button>

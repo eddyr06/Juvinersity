@@ -6,6 +6,7 @@ import {
   updateFaq,
   deleteFaq,
 } from "../controllers/faq.js";
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
 

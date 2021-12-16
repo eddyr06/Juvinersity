@@ -21,7 +21,11 @@ export const getAnArticle = async (req, res) => {
 
 export const createArticle = async (req, res) => {
   const article = req.body;
-  const newArticle = new Article(article);
+  const newArticle = new Article({
+    ...article,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
   //calling the model "Article" and asigning the article var declared in the line before
 
   try {

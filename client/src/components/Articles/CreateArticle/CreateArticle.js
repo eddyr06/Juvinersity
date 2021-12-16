@@ -17,6 +17,7 @@ const CreateArticle = ({ currentId, setCurrentId, ...rest }) => {
   });
   let topics = ["Printer", "Reports", "Menus", "Hardware", "Operations"];
   let modules = ["Point Of Sale", "Backoffice", "Admin"];
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   //finding and matching the ID with the article we are going to edit
   const article = useSelector((state) =>
@@ -31,22 +32,31 @@ const CreateArticle = ({ currentId, setCurrentId, ...rest }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (article?._id) {
-      dispatch(updateArticle(article?._id, articleData));
+      dispatch(
+        updateArticle(article?._id, {
+          ...articleData,
+          name: user?.result?.name,
+        })
+      );
     } else {
-      dispatch(createArticle(articleData));
+      dispatch(createArticle({ ...articleData, name: user?.result?.name }));
     }
     clear();
     history.push("/Topics");
   };
 
   const clear = () => {
-    // setarticle._id(null);
+    // setCurrentId(0);
     setArticleData({
       title: "",
       description: "",
       fullDescription: "",
     });
   };
+
+  if (!user?.result?.name) {
+    return <h1>Please Sign in</h1>;
+  }
 
   return (
     <Container className="create-article">

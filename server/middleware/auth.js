@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 
 const auth = async (req, res, next) => {
   try {
     //getting token from the frontend, token always comes in the first position of the array after split
-    const token = req.headers.Authorization.split("")[1];
+    const token = req.headers.Authorization.split(" ")[1];
     //if token is less than 500 it is from back end, if more its google
     const isCustomAuth = token.length < 500;
 
@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
       decodedData = jwt.verify(token, process.env.SECRET);
 
       //storing his ID so we can audit it
-      req.userID = decodedData?.id;
+      req.userId = decodedData?.id;
     }
     //verifying if this is google token
     else {
@@ -24,10 +24,10 @@ const auth = async (req, res, next) => {
       decodedData = jwt.decode(token);
 
       //sub is google's unique user ID
-      req.userID = decodedData?.sub;
+      req.userId = decodedData?.sub;
     }
 
-    nect();
+    next();
   } catch (error) {}
 };
 

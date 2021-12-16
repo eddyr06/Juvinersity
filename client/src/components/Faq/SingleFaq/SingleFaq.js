@@ -26,6 +26,10 @@ const SingleFaq = ({ post, setCurrentId, ...rest }) => {
     }
   };
 
+  const handleDelete = (e) => {
+    dispatch(deleteFaq(postId));
+    history.push(`/FAQs`);
+  };
   return (
     <Container>
       <Row className="mb-3 pt-3">
@@ -54,7 +58,7 @@ const SingleFaq = ({ post, setCurrentId, ...rest }) => {
             variant="outline-secondary"
             size="md"
             className="ms-4"
-            onClick={() => dispatch(deleteFaq(postId))}
+            onClick={handleDelete}
           >
             Delete
           </Button>

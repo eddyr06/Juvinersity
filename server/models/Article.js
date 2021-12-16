@@ -33,9 +33,12 @@ const articleSchema = mongoose.Schema({
     default: new Date(),
   },
 
-  creatorId: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
+  creator: {
+    type: String,
+  },
+
+  name: {
+    type: String,
   },
 
   creator: {
