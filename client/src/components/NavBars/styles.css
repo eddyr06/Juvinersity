@@ -1,0 +1,18 @@
+.nav-img {
+  width: 139px;
+  height: 37px;
+}
+
+.signin-user {
+  color: #f0f5ff;
+  padding-right: 50px;
+}
+
+.color-nav {
+  background-color: #2c374d;
+  color: #f0f5ff !important;
+}
+
+.nav-bars {
+  margin-bottom: 10px;
+}

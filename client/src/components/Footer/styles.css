@@ -1,0 +1,10 @@
+.footer-section ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.footer-section li a {
+  color: #ccd3e2;
+  text-decoration: none;
+}

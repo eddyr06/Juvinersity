@@ -1,0 +1,10 @@
+.article-section {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.create-article {
+  background-color: #2c374d;
+  color: white;
+  font-size: 20px;
+}
