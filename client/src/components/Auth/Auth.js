@@ -73,45 +73,48 @@ const Auth = () => {
         <Col lg={5}>
           <Container>
             <Image src={logo} alt="logo" fluid />
-            <Row className="mt-4">
-              <Container>
-                <Stack direction="horizontal" gap={5} className="my-auto">
+            <Container className="pt-3">
+              <Row className="mt-4">
+                <Col className="ms-5">
                   <Button
                     variant={isSignup ? "outline-secondary" : "outline-info"}
                     onClick={switchMode}
+                    size="md"
                   >
                     Sign In
                   </Button>
+                </Col>
+                <Col className="ms-5">
                   <Button
                     variant={isSignup ? "outline-info" : "outline-secondary"}
                     onClick={switchMode}
                   >
                     Sign Up
                   </Button>
-                </Stack>
+                </Col>
+              </Row>
+              <Container className="ms-2">
+                <Row className="mt-4">
+                  <Col className="ms-5 ps-5">
+                    <GoogleLogin
+                      clientId="390438336361-6aq86nkqqtg2dsvah8s85a70nj2guqct.apps.googleusercontent.com"
+                      render={(props) => (
+                        <Button
+                          variant="outline-success"
+                          onClick={props.onClick}
+                          disabled={props.disabled}
+                        >
+                          Sign In with Google
+                        </Button>
+                      )}
+                      onSuccess={googleSuccess}
+                      onFailure={googleFailure}
+                      cookiePolicy="single_host_origin"
+                    />
+                  </Col>
+                </Row>
               </Container>
-            </Row>
-            <Row className="mt-4">
-              <Col lg={2}></Col>
-
-              <Col lg={10}>
-                <GoogleLogin
-                  clientId="390438336361-6aq86nkqqtg2dsvah8s85a70nj2guqct.apps.googleusercontent.com"
-                  render={(props) => (
-                    <Button
-                      variant="outline-success"
-                      onClick={props.onClick}
-                      disabled={props.disabled}
-                    >
-                      Sign In with Google
-                    </Button>
-                  )}
-                  onSuccess={googleSuccess}
-                  onFailure={googleFailure}
-                  cookiePolicy="single_host_origin"
-                />
-              </Col>
-            </Row>
+            </Container>
 
             <Form onSubmit={handleSubmit}>
               {isSignup && (
@@ -176,7 +179,7 @@ const Auth = () => {
               )}
               <Stack className="col-md-3 pt-2 mx-auto">
                 <Button
-                  className="mt-4"
+                  className="mt-4 mb-3"
                   variant={isSignup ? "info" : "info"}
                   type="submit"
                 >

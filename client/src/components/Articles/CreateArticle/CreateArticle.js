@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createArticle, updateArticle } from "../../../actions/articlesAct";
-import { useHistory } from "react-router-dom";
-import { Form, Container, Row, Col, Button } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
+import { Form, Container, Row, Col, Button, Modal } from "react-bootstrap";
 
 const CreateArticle = ({ currentId, setCurrentId, ...rest }) => {
   const dispatch = useDispatch();
@@ -55,7 +55,26 @@ const CreateArticle = ({ currentId, setCurrentId, ...rest }) => {
   };
 
   if (!user?.result?.name) {
-    return <h1>Please Sign in</h1>;
+    return (
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>Action Needed</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>You must Sign In or Sign Up to use this function.</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={() => history.goBack()} variant="outline-secondary">
+            Go Back
+          </Button>
+          <Link to="/auth">
+            <Button variant="secondary">Sign In</Button>
+          </Link>
+        </Modal.Footer>
+      </Modal.Dialog>
+    );
   }
 
   return (

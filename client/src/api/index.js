@@ -2,15 +2,15 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:4000" });
 
-// API.interceptors.request.use((req) => {
-//   if (localStorage.getItem("profile")) {
-//     req.headers.Authorization = `Bearer ${
-//       JSON.parse(localStorage.getItem("profile")).token
-//     }`;
-//   }
+API.interceptors.request.use((req) => {
+  if (localStorage.getItem("profile")) {
+    req.headers.Authorization = `Bearer ${
+      JSON.parse(localStorage.getItem("profile")).token
+    }`;
+  }
 
-//   return req;
-// });
+  return req;
+});
 
 //ARTICLES
 export const fetchArticles = () => API.get("/articles");
@@ -27,6 +27,7 @@ export const createFaq = (newFaq) => API.post("/faqs", newFaq);
 export const updateFaq = (id, updatedFaq) =>
   API.patch(`/faqs/${id}`, updatedFaq);
 export const deleteFaq = (id) => API.delete(`/faqs/${id}`);
+export const likePost = (id) => API.patch(`/faqs/${id}/likePost`);
 
 //USERS
 export const signIn = (formData) => API.post("/users/signin", formData);

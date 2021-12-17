@@ -5,6 +5,7 @@ import {
   createFaq,
   updateFaq,
   deleteFaq,
+  likePost,
 } from "../controllers/faq.js";
 import auth from "../middleware/auth.js";
 
@@ -15,5 +16,6 @@ router.get("/:id", getFaq);
 router.post("/", createFaq);
 router.patch("/:id", updateFaq);
 router.delete("/:id", deleteFaq);
+router.patch("/", likePost);
 
 export default router;

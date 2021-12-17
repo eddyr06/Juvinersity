@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createFaq, updateFaq } from "../../../actions/faqAct";
-import { useHistory } from "react-router-dom";
-import { Container, Form, Button } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
+import { Container, Form, Button, Modal } from "react-bootstrap";
 import "../styles.css";
 
 const CreateFaq = ({ currentId, setCurrentId, ...rest }) => {
@@ -13,6 +13,7 @@ const CreateFaq = ({ currentId, setCurrentId, ...rest }) => {
     subject: "",
     description: "",
   });
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   //finding and matching the ID with the article we are going to edit
   const post = useSelector((state) =>
@@ -42,6 +43,29 @@ const CreateFaq = ({ currentId, setCurrentId, ...rest }) => {
       description: "",
     });
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>Action Needed</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>You must Sign In or Sign Up to use this function.</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={() => history.goBack()} variant="outline-secondary">
+            Go Back
+          </Button>
+          <Link to="/auth">
+            <Button variant="secondary">Sign In</Button>
+          </Link>
+        </Modal.Footer>
+      </Modal.Dialog>
+    );
+  }
 
   return (
     <Container className="faq-form">

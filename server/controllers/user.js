@@ -55,6 +55,7 @@ export const signin = async (req, res) => {
     );
     //receiving the result
     res.status(200).json({ result: existingUser, token });
+    console.log();
   } catch (error) {
     res.status(500).json({ message: "something went wrong" });
   }
@@ -87,11 +88,6 @@ export const signup = async (req, res) => {
       { email: result.email, id: result._id },
       process.env.SECRET,
       { expiresIn: 3600000 }
-      //   (error, token) => {
-      //     if (error) {
-      //       res.status(500).json({ message: "this is inside the token" });
-      //     }
-      //   }
     );
 
     //pushes the user to the DB

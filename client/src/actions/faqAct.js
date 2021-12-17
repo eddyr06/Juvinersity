@@ -5,6 +5,7 @@ import {
   UPDATE,
   FETCH_ALL,
   FETCH,
+  LIKE,
 } from "../constants/actionTypes.js";
 
 //these are the actions that are called when you dispatch anything through redux
@@ -58,6 +59,16 @@ export const deleteFaq = (id) => async (dispatch) => {
   try {
     await api.deleteFaq(id);
     dispatch({ type: DELETE, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.likePost(id);
+    console.log(data);
+    dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error);
   }

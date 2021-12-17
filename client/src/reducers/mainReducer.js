@@ -7,6 +7,7 @@ import {
   FETCH_ALL,
   FETCH,
   GET,
+  LIKE,
 } from "../constants/actionTypes.js";
 
 const mainReducer = (data = [], action) => {
@@ -16,6 +17,7 @@ const mainReducer = (data = [], action) => {
     case DELETE:
       return data.filter((data) => data._id !== action.payload);
     case UPDATE:
+    case LIKE:
       return data.map((data) =>
         data._id === action.payload._id ? action.payload : data
       );

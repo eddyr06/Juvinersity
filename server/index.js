@@ -24,6 +24,10 @@ app.use("/faqs", faqRoutes);
 app.use("/relnotes", relnotesRoutes);
 app.use("/users", usersRoutes);
 
+app.get("/", (req, res) => {
+  res.send("hello there");
+});
+
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const PORT = process.env.PORT || 4000;

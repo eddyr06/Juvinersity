@@ -15,6 +15,10 @@ const faqSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  likeCount: {
+    type: Number,
+    default: 0,
+  },
 
   creatorId: {
     type: mongoose.Types.ObjectId,

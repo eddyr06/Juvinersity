@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   deleteArticle,
   editArticle,
@@ -20,6 +20,7 @@ const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
     topic: article?.topic,
     module: article?.module,
   });
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     dispatch(getAnArticle(rest.match.params.id));
@@ -48,7 +49,16 @@ const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
       </Row>
       <Card>
         <Card.Header className="fs-6">
-          {article?.module} - {article?.topic}
+          <Stack direction="horizontal" gap={3}>
+            <div>
+              {article?.module} - {article?.topic}
+            </div>
+            <div className="ms-auto">
+              <Button onClick={() => history.goBack()} variant="secondary">
+                X
+              </Button>
+            </div>
+          </Stack>
         </Card.Header>
         <Row>
           <Stack direction="horizontal" gap={5}>
@@ -97,34 +107,36 @@ const SingleArticle = ({ article = {}, setCurrentId, ...rest }) => {
           </Card.Body>
         </Container>
 
-        <Card.Footer>
-          <Button
-            active
-            variant="outline-secondary"
-            size="md"
-            className="ms-1"
-            onClick={handleEdit}
-          >
-            Edit
-          </Button>
+        {user?.result?.name && (
+          <Card.Footer>
+            <Button
+              active
+              variant="outline-secondary"
+              size="md"
+              className="ms-1"
+              onClick={handleEdit}
+            >
+              Edit
+            </Button>
 
-          <Button
-            variant="outline-secondary"
-            size="md"
-            className="ms-4"
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-          <Button
-            variant="outline-secondary"
-            size="md"
-            className="ms-4"
-            onClick={() => history.goBack()}
-          >
-            Cancel
-          </Button>
-        </Card.Footer>
+            <Button
+              variant="outline-secondary"
+              size="md"
+              className="ms-4"
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+            <Button
+              variant="outline-secondary"
+              size="md"
+              className="ms-4"
+              onClick={() => history.goBack()}
+            >
+              Cancel
+            </Button>
+          </Card.Footer>
+        )}
       </Card>
     </Container>
   );

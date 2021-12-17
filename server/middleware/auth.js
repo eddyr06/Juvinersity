@@ -2,8 +2,9 @@ import jwt, { decode } from "jsonwebtoken";
 
 const auth = async (req, res, next) => {
   try {
+    console.log(req.headers);
     //getting token from the frontend, token always comes in the first position of the array after split
-    const token = req.headers.Authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1];
     //if token is less than 500 it is from back end, if more its google
     const isCustomAuth = token.length < 500;
 
@@ -28,7 +29,9 @@ const auth = async (req, res, next) => {
     }
 
     next();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default auth;
